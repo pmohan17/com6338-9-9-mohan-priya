@@ -1,3 +1,4 @@
+//convert var to let or const
 const container = document.getElementById('weather')
 var userInput
 const URL = "https://api.openweathermap.org/data/2.5/weather"
@@ -6,7 +7,7 @@ var fullURL = URL + queryString
 const h2 = document.createElement('h2')
 const form = document.querySelector('form')
 
-//need form to submit on click
+//convert to async
 form.onsubmit = async function(e) {
     e.preventDefault()
     container.innerHTML = ''
@@ -19,12 +20,13 @@ form.onsubmit = async function(e) {
     const res = await fetch(fullURL)
         if (res.status !== 200) throw new Error('Location not Found')
         const mapData = await res.json()
-        
-        
-    .then(data => {
+    //convert to arrow function
+    .then (data => {
+        //use ES6 destructuring
         const {name} = data
         const city = name
         const country = data.sys.country
+        //use template literal and string interpolation
         h2.textContent = `${city}, ${country}`
         container.appendChild(h2)
 
